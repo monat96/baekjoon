@@ -1,25 +1,27 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-bool isPick[10];
+int picked[10];
+int isPick[10];
 
-void backTracking(vector<int> &picked, int range, int toPick, int pick)
+void func(int range, int toPick, int pick)
 {
     if(toPick == pick)
     {
-        for(auto ret : picked) cout << ret << ' ';
+        for(int i = 0; i < toPick; i++)
+            cout << picked[i] << ' ';
         cout << '\n';
         return ;
     }
     for(int next = 1; next <= range; next++)
     {
         if(isPick[next]) continue;
-        picked.push_back(next);
+        picked[pick] = next;
         isPick[next] = true;
-        backTracking(picked, range, toPick, pick + 1);
-        picked.pop_back();
+        func(range, toPick, pick + 1);
         isPick[next] = false;
     }
 }
@@ -31,8 +33,7 @@ int main(int argc, char const *argv[])
     
     int n, m;
     cin >> n >> m;
-    vector<int> picked;
-    backTracking(picked, n, m, 0);
+    func(n, m, 0);
 
     return 0;
 }
