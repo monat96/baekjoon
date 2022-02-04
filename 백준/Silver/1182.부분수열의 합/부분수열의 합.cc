@@ -1,37 +1,38 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <numeric>
 
 using namespace std;
 
-int arr[21];
-int target;
-int cnt = 0;
+const int MAX = 21;
 
-void func(int size, int pick, int calc)
+int arr[MAX];
+int answer = 0;
+int target;
+
+void func(int size, int idx, int sum)
 {
-    if(size == pick)
+    if(size == idx)
     {
-        if(target == calc)
-            cnt++;
+        if(sum == target) answer++;
         return ;
     }
-    func(size, pick+1, calc);
-    func(size, pick+1, calc + arr[pick]);
+    func(size, idx + 1, sum);
+    func(size, idx + 1, sum + arr[idx]);
 }
 
 int main(int argc, char const *argv[])
 {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    
+
     int n;
     cin >> n >> target;
 
     for(int i = 0; i < n; i++) cin >> arr[i];
+
     func(n, 0, 0);
-    if(target==0) cnt--;
-    cout << cnt;
+    if(target==0)answer--;
+    cout << answer;
     return 0;
 }
