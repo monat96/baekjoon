@@ -14,9 +14,7 @@ void func(int size, int toPick, int pick)
         cout << '\n';
         return ;
     }
-
     int start = picked.empty() ? 1 : picked.back();
-
     for(int next = start; next <= size; next++)
     {
         picked.push_back(next);
