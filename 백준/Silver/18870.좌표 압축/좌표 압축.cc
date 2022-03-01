@@ -7,18 +7,7 @@
 
 using namespace std;
 
-int lowerBound(vector<int> arr, int target) {
-  int left = 0;
-  int right = int(arr.size());
-  while (left < right) {
-    int mid = (left + right) / 2;
-    if (arr[mid] > target)
-      right = mid;
-    else
-      left = mid + 1;
-  }
-  return left;
-}
+int arr[1'000'001];
 
 int main(int argc, char const* argv[]) {
   ios::sync_with_stdio(false);
@@ -26,20 +15,20 @@ int main(int argc, char const* argv[]) {
 
   int n;
   cin >> n;
-
-  vector<int> arr;
-  set<int> sArr;
-
-  while (n--) {
-    int x;
-    cin >> x;
-    arr.push_back(x);
-    sArr.insert(x);
+  vector<int> tmp, uni;
+  
+  for(int i = 0; i < n; i++) {
+    cin >> arr[i];
+    tmp.push_back(arr[i]);
   }
-  vector<int> dArr(sArr.begin(), sArr.end());
 
-  for(auto ret : arr) {
-    cout << lower_bound(dArr.begin(), dArr.end(), ret) - dArr.begin() << ' ';  
+  sort(tmp.begin(), tmp.end());
+  for(int i = 0; i < n; i++) {
+    if(i == 0 || tmp[i-1] != tmp[i])
+      uni.push_back(tmp[i]);
+  }
+  for(int i = 0; i < n; i++) {
+    cout << lower_bound(uni.begin(), uni.end(), arr[i]) - uni.begin() << ' ';
   }
 
   return 0;
