@@ -15,19 +15,16 @@ int main(int argc, char const* argv[]) {
 
   int n;
   cin >> n;
-  vector<int> tmp, uni;
-  
-  for(int i = 0; i < n; i++) {
+  vector<int> uni;
+
+  for (int i = 0; i < n; i++) {
     cin >> arr[i];
-    tmp.push_back(arr[i]);
+    uni.push_back(arr[i]);
   }
 
-  sort(tmp.begin(), tmp.end());
-  for(int i = 0; i < n; i++) {
-    if(i == 0 || tmp[i-1] != tmp[i])
-      uni.push_back(tmp[i]);
-  }
-  for(int i = 0; i < n; i++) {
+  sort(uni.begin(), uni.end());
+  uni.erase(unique(uni.begin(), uni.end()), uni.end());
+  for (int i = 0; i < n; i++) {
     cout << lower_bound(uni.begin(), uni.end(), arr[i]) - uni.begin() << ' ';
   }
 
