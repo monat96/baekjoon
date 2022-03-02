@@ -19,10 +19,9 @@ int main(int argc, char const* argv[]) {
 
   for(int i = 0; i < n - 2; i++) {
     for(int j = i + 1; j < n - 1; j++) {
-      long long temp = -(arr[i] + arr[j]);
-      int left = lower_bound(arr + j + 1, arr + n, temp) - arr;
-      int right = upper_bound(arr + j + 1, arr + n, temp) - arr;
-      ans += (right-left);
+      int temp = -(arr[i] + arr[j]);
+      auto ret = equal_range(arr + j + 1, arr + n, temp);
+      ans += (ret.second - ret.first);
     }
   }
   cout << ans;
