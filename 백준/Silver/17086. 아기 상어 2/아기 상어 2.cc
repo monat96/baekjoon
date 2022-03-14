@@ -26,11 +26,9 @@ int main(int argc, char const *argv[]) {
       }
     }
 
-  bool isFind = false;
+  int ans = 0;
 
   while (!que.empty()) {
-    if (isFind) break;
-
     auto curr = que.front();
     int y, x;
 
@@ -47,12 +45,7 @@ int main(int argc, char const *argv[]) {
       }
       visited[ay][ax] = visited[y][x] + 1;
       que.push({ay, ax});
-    }
-  }
-  int ans = 0;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      ans = max(ans, visited[i][j]);
+      ans = max(ans, visited[ay][ax]);
     }
   }
   cout << ans;
