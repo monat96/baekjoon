@@ -9,9 +9,8 @@ int main(int argc, char const *argv[]) {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 
-  for (int i = 0; i <= 30; i++) dp[0][i] = 1;
-
-  for (int w = 1; w <= 30; w++) {
+  dp[0][0] = 1;
+  for (int w = 0; w <= 30; w++) {
     for (int h = 1; h <= 30; h++) {
       ll ret = 0;
       if (w - 1 >= 0 && (w - 1) <= h) ret += dp[w - 1][h];
