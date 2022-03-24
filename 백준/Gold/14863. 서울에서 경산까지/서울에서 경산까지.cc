@@ -19,7 +19,7 @@ int main(int argc, char const* argv[]) {
   dp[1][step[1].first] = step[1].second;
   dp[1][bike[1].first] = max(dp[1][bike[1].first], bike[1].second);
 
-  for (int i = 1; i <= n; i++) {
+  for (int i = 2; i <= n; i++) {
     for (int j = 0; j <= k; j++) {
       if (dp[i - 1][j] == 0) continue;
 
