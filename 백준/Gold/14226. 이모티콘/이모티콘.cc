@@ -1,54 +1,44 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-#include <vector>
-#include <numeric>
-#include <cassert>
-#include <map>
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int graph[1001][1001];
+int maps[1001][1001];
 
-int main(int argc, char const *argv[])
-{
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    
-    int n;
-    cin >> n;
-    
-    queue<pair<int, int>> que;
-    que.push({1,0});
+int main(int argc, char const* argv[]) {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 
-    while(!que.empty())
-    {
-        pair<int, int> curr = que.front(); que.pop();
-        
-        int node = curr.first;
-        int clip = curr.second;
+  int n;
+  cin >> n;
 
-        if(node - 1 > 1 && graph[node-1][clip] == 0)
-        {
-            graph[node-1][clip] = graph[node][clip] + 1;
-            que.push({node-1, clip});
-        }
-        if(graph[node][node] == 0)
-        {
-            graph[node][node] = graph[node][clip] + 1;
-            que.push({node, node});
-        }
-        if(node + clip <= n && graph[node+clip][clip] == 0)
-        {
-            graph[node + clip][clip] = graph[node][clip] + 1;
-            que.push({node + clip, clip});
-        }
+  queue<pair<int, int>> que;
+  que.push({1, 0});
+
+  while (!que.empty()) {
+    int node, clip;
+    tie(node, clip) = que.front();
+    que.pop();
+
+    // copy
+    if (maps[node][node] == 0) {
+      maps[node][node] = maps[node][clip] + 1;
+      que.push({node, node});
     }
-    int ret = 0xfffffff;
-    for(int i = 1; i <= n; i++)
-        if(graph[n][i] != 0 && ret > graph[n][i])
-            ret = graph[n][i];
-    cout << ret;
-    return 0;
+    // paste
+    if ((node + clip) <= n && maps[node + clip][clip] == 0) {
+      maps[node + clip][clip] = maps[node][clip] + 1;
+      que.push({node + clip, clip});
+    }
+    // delete
+    if ((node - 1) > 0 && maps[node - 1][clip] == 0) {
+      maps[node - 1][clip] = maps[node][clip] + 1;
+      que.push({node - 1, clip});
+    }
+  }
+
+  int ans = 0xfffffff;
+  for (int i = 1; i <= n; i++)
+    if (maps[n][i] != 0 && ans > maps[n][i]) ans = maps[n][i];
+  cout << ans;
+  return 0;
 }
