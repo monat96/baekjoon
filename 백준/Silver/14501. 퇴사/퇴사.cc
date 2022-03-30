@@ -1,15 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
-#include <numeric>
-#include <cmath>
-#include <queue>
-#include <list>
-#include <stack>
-#include <stdio.h>
-#include <set>
-#include <functional>
+#include <bits/stdc++.h>
 
 using namespace std;
 
