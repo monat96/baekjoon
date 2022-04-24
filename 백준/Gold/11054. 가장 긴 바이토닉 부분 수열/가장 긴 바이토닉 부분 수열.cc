@@ -12,15 +12,6 @@ int main(int argc, char const *argv[]) {
   for (auto &ret : base) cin >> ret;
 
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < i; j++) {
-      if (base[j] < base[i]) {
-        upper[i] = max(upper[i], upper[j]);
-      }
-    }
-    upper[i]++;
-  }
-
-  for (int i = 0; i < n; i++) {
     upper[i] = 1;
     for (int j = 0; j < i; j++) {
       if (base[j] < base[i]) upper[i] = max(upper[i], upper[j] + 1);
