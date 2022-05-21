@@ -27,14 +27,14 @@ void backTraking() {
   tie(ay, ax) = que.front();
 
   for (int nxt = 1; nxt <= SIZE; nxt++) {
-    // not valid
+    // invalid
+    int areaNum = 3 * (ay / 3) + (ax / 3);
     if (rowCnt[ay][nxt] != 0 || colCnt[ax][nxt] != 0 ||
-        areaCnt[3 * (ay / 3) + (ax / 3)][nxt] != 0)
+        areaCnt[areaNum][nxt] != 0)
       continue;
     // valid
     maps[ay][ax] = nxt;
-    rowCnt[ay][nxt] = colCnt[ax][nxt] = areaCnt[3 * (ay / 3) + (ax / 3)][nxt] =
-        1;
+    rowCnt[ay][nxt] = colCnt[ax][nxt] = areaCnt[areaNum][nxt] = 1;
     que.pop_front();
 
     backTraking();
@@ -42,8 +42,7 @@ void backTraking() {
     if (isFind) break;
 
     maps[ay][ax] = 0;
-    rowCnt[ay][nxt] = colCnt[ax][nxt] = areaCnt[3 * (ay / 3) + (ax / 3)][nxt] =
-        0;
+    rowCnt[ay][nxt] = colCnt[ax][nxt] = areaCnt[areaNum][nxt] = 0;
     que.push_front({ay, ax});
   }
 }
